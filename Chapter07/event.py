@@ -19,7 +19,7 @@ class Widget(QWidget):
 
     def giveHelp(self):
         self.text = "请点击这里触发追踪鼠标功能"
-        self.update() # 重绘事件，也就是触发paintEvent函数。
+        self.update()  # 重绘事件，也就是触发paintEvent函数。
 
     '''重新实现关闭事件'''
     def closeEvent(self, event):
@@ -57,12 +57,12 @@ class Widget(QWidget):
         i = text.find("\n\n")
         if i >= 0:
             text = text[0:i]
-        if self.key: # 若触发了键盘按钮，则在文本信息中记录这个按钮信息。
+        if self.key:  # 若触发了键盘按钮，则在文本信息中记录这个按钮信息。
             text += "\n\n你按下了: {0}".format(self.key)
         painter = QPainter(self)
         painter.setRenderHint(QPainter.TextAntialiasing)
-        painter.drawText(self.rect(), Qt.AlignCenter, text) # 绘制信息文本的内容
-        if self.message: # 若消息文本存在则在底部居中绘制消息，5秒钟后清空消息文本并重绘。
+        painter.drawText(self.rect(), Qt.AlignCenter, text)  # 绘制信息文本的内容
+        if self.message:  # 若消息文本存在则在底部居中绘制消息，5秒钟后清空消息文本并重绘。
             painter.drawText(self.rect(), Qt.AlignBottom | Qt.AlignHCenter,
                              self.message)
             QTimer.singleShot(5000, self.clearMessage)
@@ -85,7 +85,7 @@ class Widget(QWidget):
         if self.justDoubleClicked:
             self.justDoubleClicked = False
         else:
-            self.setMouseTracking(not self.hasMouseTracking()) # 单击鼠标
+            self.setMouseTracking(not self.hasMouseTracking())  # 单击鼠标
             if self.hasMouseTracking():
                 self.text = "开启鼠标跟踪功能.\n" + \
                             "请移动一下鼠标！\n" + \
@@ -98,7 +98,7 @@ class Widget(QWidget):
     '''重新实现鼠标移动事件'''
     def mouseMoveEvent(self, event):
         if not self.justDoubleClicked:
-            globalPos = self.mapToGlobal(event.pos()) # 窗口坐标转换为屏幕坐标
+            globalPos = self.mapToGlobal(event.pos())  # 窗口坐标转换为屏幕坐标
             self.text = """鼠标位置：
             窗口坐标为：QPoint({0}, {1}) 
             屏幕坐标为：QPoint({2}, {3}) """.format(event.pos().x(), event.pos().y(), globalPos.x(), globalPos.y())
